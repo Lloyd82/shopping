@@ -11,4 +11,5 @@ public class NoticeDTO {
 	private String passwd;
 	private int cnt;
 	private String rdate;
+
 }

@@ -34,12 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="list" parameterType="Map"
 		resultType="com.study.contents.ContentsDTO">
-		select contentsno, cateno, pname, price, filename, stock, rdate, r
-		from (
-			select contentsno, cateno, pname, price, filename, stock,rdate, rownum r
-			from(
+		SELECT contentsno, cateno, pname, price, filename, stock, rdate, r
+		FROM (
+			SELECT contentsno, cateno, pname, price, filename, stock,rdate, rownum r
+			FROM (
 				select contentsno, cateno,pname, price, filename, stock,rdate
-				from contents
+				FROM contents
 				<where>
 				<choose>
 					<when test="col=='pname'">
@@ -69,7 +69,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where contentsno =#{contentsno}
 	</update>
 
-
 	<insert id="create"
 		parameterType="com.study.contents.ContentsDTO">
 		insert into contents(contentsno, cateno, pname, price, filename, detail,
@@ -83,12 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select cateno, catename from category
 		where categrpno is null
 	</select>
+	
 	<select id="mainlist" parameterType="map" resultType="com.study.contents.ContentsDTO">
         select contentsno, cateno, pname, price, filename, stock,  r
         from (
             select contentsno, cateno, pname, price, filename, stock, rownum r
             from(
-                select contentsno, cateno,pname, price, filename, stock
+                select contentsno, cateno, pname, price, filename, stock
                 from contents
                  
                 <where>
